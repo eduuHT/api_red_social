@@ -1,13 +1,31 @@
 ﻿@model GetUserDTO
+<head>
+    <link rel="stylesheet" href="~/css/UserStyles.css" />
+</head>
+<body>
+    <form asp-action="Index" method="get">
 
-<form asp-action="Index" method="get">
-    <input type="text" name="Username" placeholder="Introduce tu usuario de github" required />
-    <button type="submit">Buscar</button>
-</form>
+        <fieldset>
+            <legend>Buscar usuario de GitHub</legend>
+                <div class="contenedor">
+                    <input type="text" name="Username" placeholder="Introduce tu usuario de github" required />              
+                </div>
+                <div class="botones">
+                    <button type="submit">Buscar</button>
+                </div>
+        </fieldset>
+    </form>
+    <div>
+        @if (ViewBag.Error == null)
+        {
+            <p style="color:red;">@ViewBag.Error</p>
+        }
+    </div>
 
-@if(Model != null)
-{
-    <p>Usuario: @Model.Login</p>
-    <p>Seguidores: @Model.Followers</p>
-    <p>Seguidos: @Model.Following</p>
-}
+    @if (Model != null)
+    {
+        <p>Usuario: @Model.Login</p>
+        <p>Seguidores: @Model.Followers</p>
+        <p>Seguidos: @Model.Following</p>
+    }
+</body>
