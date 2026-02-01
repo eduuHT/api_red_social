@@ -9,11 +9,12 @@ namespace api_red_social.Controllers
 
         public UserController(UserService userService)
         {
-            _userService = userService;
+            _userService = userService; // Inyeccion de dependencia del UserService
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string Username) // Accion para manejar las solicitudes a /User/Index
         {
-            return View();
+            var user = await _userService.GetUserAsync(Username); // Obtener datos del usuario
+            return View(user); // Retornar la vista con los datos del usuario
         }
     }
 }
