@@ -16,7 +16,7 @@
         </fieldset>
     </form>
     <div>
-        @if (ViewBag.Error == null)
+        @if (ViewBag.Error != null)
         {
             <p style="color:red;">@ViewBag.Error</p>
         }
@@ -24,8 +24,27 @@
 
     @if (Model != null)
     {
-        <p>Usuario: @Model.Login</p>
-        <p>Seguidores: @Model.Followers</p>
-        <p>Seguidos: @Model.Following</p>
+        <div class="card">
+            <div class="card-content">
+
+                <img class="perfil" src="@Model.AvatarUrl" alt="Avatar usuario" />
+
+                <div class="datos">
+                    <p><strong>Nombre Real:</strong> @Model.Name</p>
+                    <p><strong>Usuario:</strong> @Model.Login</p>
+                    <p><strong>Seguidores:</strong> @Model.Followers</p>
+                    <p><strong>Seguidos:</strong> @Model.Following</p>
+                    <p><strong>Repositorios Públicos:</strong> @Model.PublicRepos</p>
+                    <p>
+                        <strong>Perfil:</strong>
+                        <a href="@Model.HtmlUrl" target="_blank">@Model.HtmlUrl</a>
+                    </p>
+                </div>
+                <div class="biografia">
+                    <p><strong>Biografía:</strong> @Model.Bio</p>
+                </div>
+
+            </div>
+        </div>
     }
 </body>
