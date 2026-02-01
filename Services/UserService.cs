@@ -6,11 +6,12 @@ namespace api_red_social.Services
     public class UserService
     {
         private readonly HttpClient _httpClient;
-        public UserService(IConfiguration configuration )
-        { 
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(configuration["GitHubApi:BaseUrl"]); // Agarramos la url base del appsettings.json
+
+        public UserService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
         }
+
         public async Task<GetUserDTO> GetUserAsync(string username)
         {
             var response = await _httpClient.GetAsync($"/users/{username}"); // Le damos de parametro el usuario a buscar
@@ -22,7 +23,7 @@ namespace api_red_social.Services
             {
                 PropertyNameCaseInsensitive = true // Ignora mayusculas y minusculas en los nombres de las propiedades
             });
-            return result; // Devolvemos el objeto GetUserDTO
+            return result;
         }
     }
 }

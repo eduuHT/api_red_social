@@ -1,3 +1,5 @@
+using api_red_social.Services;
+
 namespace api_red_social
 {
     public class Program
@@ -9,6 +11,12 @@ namespace api_red_social
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddHttpClient<UserService>(client =>
+            {
+                client.BaseAddress = new Uri("https://api.github.com/");
+                client.DefaultRequestHeaders.Add("User-Agent", "ApiRedSocialApp");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

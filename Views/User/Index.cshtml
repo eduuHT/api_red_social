@@ -1,0 +1,13 @@
+﻿@model GetUserDTO
+
+<form asp-action="Index" method="get">
+    <input type="text" name="Username" placeholder="Introduce tu usuario de github" required />
+    <button type="submit">Buscar</button>
+</form>
+
+@if(Model != null)
+{
+    <p>Usuario: @Model.Login</p>
+    <p>Seguidores: @Model.Followers</p>
+    <p>Seguidos: @Model.Following</p>
+}

@@ -2,9 +2,9 @@
 
 namespace api_red_social.Models
 {
-    public class GetUserDTO
+    public class GetUserDTO // La api devueve muchos campos por lo que solo mapeamos los que nos interesan
     {
-        [JsonPropertyName("login")]
+        [JsonPropertyName("login")] // sirve para mapear el nombre del campo en el json con la propiedad de la clase
         public string Login { get; set; }
 
         [JsonPropertyName("name")]
