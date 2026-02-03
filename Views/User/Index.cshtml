@@ -15,12 +15,13 @@
                 </div>
         </fieldset>
     </form>
-    <div>
-        @if (ViewBag.Error != null)
+        @if (Model == null)
         {
-            <p style="color:red;">@ViewBag.Error</p>
+            <div>
+                <p style="color:red;">@ViewBag.Error</p>
+                <p>Usuario no encontrado</p>
+            </div>
         }
-    </div>
 
     @if (Model != null)
     {

@@ -14,9 +14,8 @@ namespace api_red_social.Controllers
         public async Task<IActionResult> Index(string Username) // Accion para manejar las solicitudes a /User/Index
         {
             if(Username == null)
-            {
-                return View();
-            }
+                return View(null);
+
             var user = await _userService.GetUserAsync(Username); // Obtener datos del usuario
             return View(user); // Retornar la vista con los datos del usuario
         }
