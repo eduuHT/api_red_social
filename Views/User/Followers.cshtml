@@ -1,0 +1,93 @@
+@model List<GetFollowersDTO>
+<head>
+    <link rel="stylesheet" href="~/css/UserStyles.css" />
+</head>
+<body>
+    @if (ViewBag.Error != null)
+    {
+        <div>
+            <p style="color:red;">@ViewBag.Error</p>
+        </div>
+    }
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="card">
+            <div class="card-content">
+                <h2>Seguidores de @ViewBag.Username</h2>
+                <p><strong>Total de seguidores:</strong> @Model.Count</p>
+                
+                <div class="followers-list">
+                    @foreach (var follower in Model)
+                    {
+                        <div class="follower-item">
+                            <img src="@follower.AvatarUrl" alt="Avatar de @follower.Login" class="follower-avatar" />
+                            <div class="follower-info">
+                                <p><strong>Usuario:</strong> @follower.Login</p>
+                                <p>
+                                    <a href="@follower.HtmlUrl" target="_blank">Ver perfil</a>
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else if (ViewBag.Username != null)
+    {
+        <div>
+            <p>No se encontraron seguidores para el usuario @ViewBag.Username o el usuario no existe.</p>
+        </div>
+    }
+    else
+    {
+        <div>
+            <p>Debes buscar un usuario primero desde la <a href="@Url.Action("Index", "User")">página principal</a>.</p>
+        </div>
+    }
+</body>
+
+<style>
+    .followers-list {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .follower-item {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background-color: #f9f9f9;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .follower-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .follower-info {
+        flex: 1;
+    }
+
+    .follower-info p {
+        margin: 5px 0;
+    }
+
+    .follower-info a {
+        color: #0366d6;
+        text-decoration: none;
+    }
+
+    .follower-info a:hover {
+        text-decoration: underline;
+    }
+</style>

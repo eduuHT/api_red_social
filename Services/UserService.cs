@@ -35,5 +35,28 @@ namespace api_red_social.Services
             }
 
         }
+
+        public async Task<List<GetFollowersDTO>> GetFollowersAsync(string username)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"/users/{username}/followers"); // Obtener seguidores del usuario
+
+                response.EnsureSuccessStatusCode(); // Asegura que la peticion fue exitosa
+
+                var json = await response.Content.ReadAsStringAsync(); // Guardamos el contenido de la respuesta como una cadena JSON
+
+                var result = JsonSerializer.Deserialize<List<GetFollowersDTO>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true // Ignora mayusculas y minusculas en los nombres de las propiedades
+                });
+
+                return result ?? new List<GetFollowersDTO>();
+            }
+            catch (HttpRequestException ex)
+            {
+                return new List<GetFollowersDTO>();
+            }
+        }
     }
 }

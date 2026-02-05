@@ -19,5 +19,18 @@ namespace api_red_social.Controllers
             var user = await _userService.GetUserAsync(Username); // Obtener datos del usuario
             return View(user); // Retornar la vista con los datos del usuario
         }
+
+        public async Task<IActionResult> Followers(string Username) // Accion para obtener seguidores
+        {
+            if(string.IsNullOrEmpty(Username))
+            {
+                ViewBag.Error = "Debe proporcionar un nombre de usuario";
+                return View(new List<Models.GetFollowersDTO>());
+            }
+
+            var followers = await _userService.GetFollowersAsync(Username); // Obtener seguidores del usuario
+            ViewBag.Username = Username; // Pasar el nombre de usuario a la vista
+            return View(followers); // Retornar la vista con la lista de seguidores
+        }
     }
 }

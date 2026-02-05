@@ -33,7 +33,12 @@
                 <div class="datos">
                     <p><strong>Nombre Real:</strong> @Model.Name</p>
                     <p><strong>Usuario:</strong> @Model.Login</p>
-                    <p><strong>Seguidores:</strong> @Model.Followers</p>
+                    <p>
+                        <strong>Seguidores:</strong> 
+                        <a href="@Url.Action("Followers", "User", new { Username = Model.Login })" class="follower-link">
+                            @Model.Followers
+                        </a>
+                    </p>
                     <p><strong>Seguidos:</strong> @Model.Following</p>
                     <p><strong>Repositorios Públicos:</strong> @Model.PublicRepos</p>
                     <p>
@@ -49,3 +54,17 @@
         </div>
     }
 </body>
+
+<style>
+    .follower-link {
+        color: #0366d6;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .follower-link:hover {
+        color: #0256c7;
+        text-decoration: underline;
+    }
+</style>
