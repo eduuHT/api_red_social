@@ -58,5 +58,25 @@ namespace api_red_social.Services
                 return new List<GetFollowersDTO>();
             }
         }
+        public async Task<List<FollowingDTO>> GetFollowingsAsync(string username, int pagina = 1, int porpagina = 30)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"/users/{username}/following? page= {pagina}& per_page={porpagina}");
+                response.EnsureSuccessStatusCode();
+
+                var Json = await response.Content.ReadAsStringAsync();
+
+                var result = JsonSerializer.Deserialize<List<FollowingDTO>>(Json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+                return result ?? new List<FollowingDTO>();
+            }
+            catch (HttpRequestException ex)
+            {
+                return new List<FollowingDTO>();
+            }
+        }
     }
 }

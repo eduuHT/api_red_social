@@ -32,5 +32,13 @@ namespace api_red_social.Controllers
             ViewBag.Username = Username; // Pasar el nombre de usuario a la vista
             return View(followers); // Retornar la vista con la lista de seguidores
         }
+        public async Task<IActionResult> Following(string UserName)
+        {
+            if (UserName == null)
+                return View(new List<Models.FollowingDTO>());
+
+            var following = await _userService.GetFollowingsAsync(UserName);
+            return View(following);
+        }
     }
 }
