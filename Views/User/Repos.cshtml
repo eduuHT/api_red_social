@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<GetRepoDTO>
+
+<h2>Repositorios de @ViewBag.Username</h2>
+
+@if (Model == null || Model.Count == 0) {
+    <p>No hay repositorios.</p>
+} else {
+    @foreach (var repo in Model) {
+        <div style="border:1px solid #000;padding:10px;margin-bottom:10px">
+
+            <h4>@repo.Name</h4>
+
+            <p>@repo.Description</p>
+
+            <p>@repo.Language</p>
+
+            <a href="@repo.Html_Url" target="_blank">
+                Abrir repositorio
+            </a>
+
+        </div>
+    }
+}

@@ -40,7 +40,10 @@
                         </a>
                     </p>
                     <p><strong>Seguidos:</strong> @Model.Following</p>
-                    <p><strong>Repositorios Públicos:</strong> @Model.PublicRepos</p>
+                    <strong>Repos:</strong>
+                    <a href="@Url.Action("Repos", "User", new { username = Model.Login })">
+                        @Model.PublicRepos
+                    </a>
                     <p>
                         <strong>Perfil:</strong>
                         <a href="@Model.HtmlUrl" target="_blank">@Model.HtmlUrl</a>

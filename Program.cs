@@ -10,7 +10,7 @@ namespace api_red_social
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddHttpClient<RepoService>();
             builder.Services.AddHttpClient<UserService>(client =>
             {
                 client.BaseAddress = new Uri("https://api.github.com/");

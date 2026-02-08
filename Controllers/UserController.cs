@@ -6,10 +6,10 @@ namespace api_red_social.Controllers
     public class UserController : Controller
     {
         private readonly UserService _userService;
-
-        public UserController(UserService userService)
+        private readonly RepoService _repoService;
+        public UserController(UserService userService, RepoService repoService)
         {
-            _userService = userService; // Inyeccion de dependencia del UserService
+            _userService = userService; _repoService = repoService;// Inyeccion de dependencia del UserService
         }
         public async Task<IActionResult> Index(string Username) // Accion para manejar las solicitudes a /User/Index
         {
@@ -39,6 +39,16 @@ namespace api_red_social.Controllers
 
             var following = await _userService.GetFollowingsAsync(UserName);
             return View(following);
+        }
+        public async Task<IActionResult> Repos(string username) {
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index");
+
+            var repos = await _repoService.GetReposByUser(username);
+
+            ViewBag.Username = username;
+
+            return View(repos);
         }
     }
 }
